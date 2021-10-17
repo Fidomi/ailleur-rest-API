@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  div#main
+    h1= title
+    p Welcome on the API of Ailleurs Project
+    p These are the available routes :
+    ul 
+      li /cartes
+      li /cartes/?type={security}
+      li /survey
+      li /results/?a1={answer1}&a2={answer2}&a3={answer3}...
