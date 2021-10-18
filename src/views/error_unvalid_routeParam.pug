@@ -1,0 +1,7 @@
+extends layout
+
+block content
+  h3= error[0].msg
+  if error[1]
+    h3= error[1].msg
+  p #{error[0].value} is not an appropriate value for #{error[0].param}  

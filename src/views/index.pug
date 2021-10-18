@@ -3,10 +3,84 @@ extends layout
 block content
   div#main
     h1= title
-    p Welcome on the API of Ailleurs Project
+    p Welcome on the API of Ailleurs's Project
+    br
+    h2 Description 
+    p This is a minimal API to communicate with the data of the ailleurs's project.
+    p This API provides only GET methods to view informations about the different French departments.
+    p All the data aggregated in the data files come from data.gouv.fr or from official French organisations like INSEE...
+    p BUT it is the fantasy of this app's creator to weight importance or not to the data. So there is not much objectivity in those results.
+    br
+    h2 Endpoints definitions
     p These are the available routes :
-    ul 
-      li /cartes
-      li /cartes/?type={security}
-      li /survey
-      li /results/?a1={answer1}&a2={answer2}&a3={answer3}...
+    div(class='routes')
+      h3(class='route') GET /maps/:type
+      p The route to get a specific classification of the French departments according to a specific criteria :  type.
+      p Only three types are available :
+       ul
+        li `security` : a map that agregates data about health and security 
+        li `family` : a map with criteria about every day life (ride's time to get to work, number of schools...) 
+        li `environment` : a map that agregates data about organic agriculture, average temperatures and nuclear threat.
+      div(class='row')
+        div(class='example_req')
+          p http://localhost:3002/maps/security
+        div(class='example_res')
+          p   mapData: [
+          p { dep_id: "50", dep_name: "Manche", danger_total: "10.76" },
+          p { dep_id: "15", dep_name: "Cantal", danger_total: "11.00" },
+          p { dep_id: "48", dep_name: "Lozère", danger_total: "11.05" },
+          p { dep_id: "53", dep_name: "Mayenne", danger_total: "11.92" },
+          p { dep_id: "12", dep_name: "Aveyron", danger_total: "12.83" },
+          p { dep_id: "85", dep_name: "Vendée", danger_total: "12.95" },
+          p { dep_id: "35", dep_name: "Ille-et-Vilaine", danger_total: "13.46" },
+          p { dep_id: "23", dep_name: "Creuse", danger_total: "13.58" },
+          p { dep_id: "79", dep_name: "Deux-Sèvres", danger_total: "13.63" },
+          p { dep_id: "2B", dep_name: "Haute-Corse", danger_total: "13.72" },
+          p { dep_id: "22", dep_name: "Côtes-d'Armor", danger_total: "13.89" },
+          p { dep_id: "49", dep_name: "Maine-et-Loire", danger_total: "14.09" },
+          p { dep_id: "39", dep_name: "Jura", danger_total: "14.23" },
+          p { dep_id: "43", dep_name: "Haute-Loire", danger_total: "14.32" },
+          p { dep_id: "29", dep_name: "Finistère", danger_total: "14.59" },
+          p { dep_id: "19", dep_name: "Corrèze", danger_total: "15.10" },
+          p { dep_id: "40", dep_name: "Landes", danger_total: "15.10" }, 
+          p ...
+    div(class='routes')
+      h3(class='route') GET /survey/
+      p The route to get the survey
+      div(class='row')
+        div(class='example_req')
+        div(class='example_res')
+    div(class='routes')
+      h3(class='route') GET /results/?a1={answer1}&a2={answer2}&a3={answer3}...
+      p The route to get the survey's results
+      div(class='row')
+        div(class='example_req')
+        div(class='example_res')
+    div(class='routes')
+      h3(class='route') GET /departement/:id/
+      p The route to get the caracteristics of a specific French department
+      div(class='row')
+        div(class='example_req')
+          p http://localhost:3002/departement/38
+        div(class='example_res')
+          p  departementData: {
+          p  _id: { $oid: "6167f6fa8dc41272169c2fce" },
+          p  num_dep: "38",
+          p  dep_name: "Isère",
+          p  region_name: "Auvergne-Rhône-Alpes",
+          p  fiber_ratio: "54.04",
+          p  schools_number: 1237,
+          p  total_population: 1288406,
+          p  total_population_region: 8167945,
+          p  rideAverageTime: "17",
+          p  num_assaults: "3798",
+          p  num_burglaries: "7308",
+          p  num_healthCenters_10000_inhabitants: 33.78940480133008,
+          p  num_nuclear_reactors: 2,
+          p  organic_farming_ratio: "8.61315027849501%",
+          p  avgTemp: 12.88891710231516,
+          p  maxTemp: 38.05,
+          p  minTemp: -10.45,
+          p  sunlight_hours: "2020",
+          p }
+
