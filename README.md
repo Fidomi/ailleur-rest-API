@@ -4,7 +4,7 @@ Welcome on the API of Ailleurs's Project
 
 ### Description
 
-This is a minimal API to communicate with the data of the ailleurs's project.
+This is a minimal API to handle the data of the Ailleurs's project.
 This API provides only GET methods to view informations about the different French departments.
 All the data aggregated in the data files come from data.gouv.fr or from official French organisations like INSEE...
 
@@ -32,7 +32,7 @@ The results are arrays of sorted departements with a score out of 100 . For secu
 
 **GET /survey/**
 
-The route to get the survey
+The route to get the survey.
 It returns an array with all the questions of the survey.
 
 | Request Example              | Response Example                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
@@ -41,19 +41,20 @@ It returns an array with all the questions of the survey.
 
 **GET /mymap/?a1={answer1}&a2={answer2}&a3={answer3}...**
 
-The route to get the survey's results
+The route to get the survey's results.
 It returns a sorted array with the classsification of the most convenient French departments for the user's app.
 
 | Request Example                                                           | Response Example                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 | ------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | http://localhost:3002/mymap/?a0=0&a1=3&a2=0&a3=2&a4=0&a5=3&a6=2&a7=3&a8=2 | `{"myMapData":{"dep_id":"74","dep_name":"Haute-Savoie","result":"27.113"},{"dep_id":"29","dep_name":"Finistère","result":"27.410"},{"dep_id":"22","dep_name":"Côtes-d'Armor","result":"27.817"},{"dep_id":"27","dep_name":"Eure","result":"28.007"},{"dep_id":"40","dep_name":"Landes","result":"28.367"},{"dep_id":"45","dep_name":"Loiret","result":"28.403"},{"dep_id":"61","dep_name":"Orne","result":"28.580"},{"dep_id":"75","dep_name":"Paris","result":"28.657"},` |
 
-**\*GET /departement/:id/**
-| Request Example | Response Example |
-| ----------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| http://localhost:3002/departement/38 | `departementData: {_id: { $oid: "6167f6fa8dc41272169c2fce" },num_dep: "38",dep_name: "Isère",region_name: "Auvergne-Rhône-Alpes",fiber_ratio: "54.04",schools_number: 1237,total_population: 1288406,total_population_region: 8167945,rideAverageTime: "17",num_assaults: "3798",num_burglaries: "7308",num_healthCenters_10000_inhabitants: 33.78940480133008,num_nuclear_reactors: 2,organic_farming_ratio: "8.61315027849501%",avgTemp: 12.88891710231516,maxTemp: 38.05,minTemp: -10.45,sunlight_hours: "2020"}`|
+**GET /departement/:id/**
 
-The route to get the caracteristics of a specific French department
+The route to get the caracteristics of a specific French department.
+
+| Request Example                      | Response Example                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| ------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| http://localhost:3002/departement/38 | `departementData: {_id: { $oid: "6167f6fa8dc41272169c2fce" },num_dep: "38",dep_name: "Isère",region_name: "Auvergne-Rhône-Alpes",fiber_ratio: "54.04",schools_number: 1237,total_population: 1288406,total_population_region: 8167945,rideAverageTime: "17",num_assaults: "3798",num_burglaries: "7308",num_healthCenters_10000_inhabitants: 33.78940480133008,num_nuclear_reactors: 2,organic_farming_ratio: "8.61315027849501%",avgTemp: 12.88891710231516,maxTemp: 38.05,minTemp: -10.45,sunlight_hours: "2020"}` |
 
 ### Error Handling
 
