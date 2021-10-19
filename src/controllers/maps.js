@@ -1,16 +1,24 @@
 import departementData from "../models/departements";
 
-const securityResults = () => {
+export const securityResults = (weight1, weight2, weight3) => {
     const security_results = departementData.reduce((acc, curValue) => {
         const weighted_average =
-            (curValue.num_assaults * 100 + curValue.num_burglaries * 100) /
-                (2 * curValue.total_population) +
-            curValue.num_healthCenters_10000_inhabitants;
+            (weight1 *
+                (100 -
+                    (parseFloat(curValue.num_assaults) * 100) /
+                        curValue.total_population) +
+                weight2 *
+                    (100 -
+                        (parseFloat(curValue.num_burglaries) * 100) /
+                            curValue.total_population) +
+                weight3 *
+                    (curValue.num_healthCenters_10000_inhabitants / 100)) /
+            (weight1 + weight2 + weight3);
 
         const result = {
             dep_id: curValue.num_dep,
             dep_name: curValue.dep_name,
-            danger_total: weighted_average.toFixed(2),
+            danger_total: 100 * weighted_average.toFixed(2),
         };
         acc.push(result);
         return acc;
@@ -19,24 +27,25 @@ const securityResults = () => {
     return security_results;
 };
 
-const environmentResults = () => {
+export const environmentResults = (weight1, weight2, weight3) => {
     const environment_results = departementData.reduce((acc, curValue) => {
         const nuclear_threat = curValue.num_nuclear_reactor
             ? curValue.num_nuclear_reactors
             : 0;
+        const nuclear_safety = (100 - nuclear_threat * 100) / 16;
         const organic_farming = curValue.organic_farming_ratio.split("");
         organic_farming.pop();
         let organicRatio = isNaN(
-            parseFloat(organic_farming.join("")).toFixed(2) * 100
+            parseFloat(organic_farming.join("")).toFixed(2)
         )
             ? 0
-            : parseFloat(organic_farming.join("")).toFixed(2) * 100;
+            : parseFloat(organic_farming.join("")).toFixed(2);
 
         const weighted_average =
-            (organicRatio / curValue.total_population +
-                (curValue.sunlight_hours * 100) / 3000 +
-                (nuclear_threat * 100) / curValue.total_population) /
-            3;
+            (weight1 * organicRatio +
+                (weight2 * (curValue.sunlight_hours * 100)) / 3000 +
+                weight3 * nuclear_safety) /
+            (weight1 + weight2 + weight3);
 
         const result = {
             dep_id: curValue.num_dep,
@@ -52,13 +61,18 @@ const environmentResults = () => {
     return environment_results;
 };
 
-const familyResults = () => {
+export const familyResults = (weight1, weight2, weight3) => {
     const family_results = departementData.reduce((acc, curValue) => {
         const weighted_average =
-            (parseFloat(curValue.fiber_ratio) +
-                (parseFloat(curValue.rideAverageTime) * 100) / 45 +
-                (curValue.schools_number * 100) / curValue.total_population) /
-            3;
+            (weight1 * parseFloat(curValue.fiber_ratio) +
+                weight2 *
+                    (100 - (parseFloat(curValue.rideAverageTime) * 100) / 60) +
+                (weight3 *
+                    ((curValue.schools_number * 100) /
+                        curValue.total_population) *
+                    100) /
+                    0.15) /
+            (weight1 + weight2 + weight3);
 
         const result = {
             dep_id: curValue.num_dep,
@@ -72,14 +86,14 @@ const familyResults = () => {
     return family_results.reverse();
 };
 
-export const getMapWithName = (name) => {
+export const getMapWithName = (name, weight1, weight2, weight3) => {
     switch (name) {
         case "security":
-            return securityResults();
+            return securityResults(weight1, weight2, weight3);
         case "environment":
-            return environmentResults();
+            return environmentResults(weight1, weight2, weight3);
         case "family":
-            return familyResults();
+            return familyResults(weight1, weight2, weight3);
         default:
             throw new Error(`The case "${name}" doesn't exist.`);
     }
