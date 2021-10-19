@@ -47,15 +47,43 @@ block content
     div(class='routes')
       h3(class='route') GET /survey/
       p The route to get the survey
+      p It returns an array with all the questions of the survey.
       div(class='row')
         div(class='example_req')
+          p http://localhost:3002/survey
         div(class='example_res')
+          p surveyData: [
+          p "Situation familiale",
+          p "tranche d'âge",
+          p "part du télétravail dans votre activité",
+          p "Craignez-vous d'être cambriolé?",
+          p "Combien de kilomètres êtes-vous prêt à parcourir pour aller voir votre généraliste?",
+          p "Est-ce que le nombre d'agressions sur un territoire est un critère important pour vous?",
+          p "Quelle est la part du bio dans votre alimentation?",
+          p "Supportez-vous la chaleur?",
+          p "A quelle distance d'une centrale nucléaire seriez-vous prêt à vous installer?",
+          p   ]
     div(class='routes')
-      h3(class='route') GET /results/?a1={answer1}&a2={answer2}&a3={answer3}...
+      h3(class='route') GET /mymap/?a1={answer1}&a2={answer2}&a3={answer3}...
       p The route to get the survey's results
+      p It returns a sorted array with the classsification of the most convenient French departments for the user's app.
       div(class='row')
         div(class='example_req')
+          p http://localhost:3002/mymap/?a0=0&a1=3&a2=0&a3=2&a4=0&a5=3&a6=2&a7=3&a8=2
         div(class='example_res')
+          p {"myMapData":[{"dep_id":"74","dep_name":"Haute-Savoie","result":"27.113"},
+          p {"dep_id":"29","dep_name":"Finistère","result":"27.410"},
+          p {"dep_id":"22","dep_name":"Côtes-d'Armor","result":"27.817"},
+          p {"dep_id":"27","dep_name":"Eure","result":"28.007"},
+          p {"dep_id":"40","dep_name":"Landes","result":"28.367"},
+          p {"dep_id":"45","dep_name":"Loiret","result":"28.403"},
+          p {"dep_id":"61","dep_name":"Orne","result":"28.580"},
+          p {"dep_id":"75","dep_name":"Paris","result":"28.657"},
+          p {"dep_id":"73","dep_name":"Savoie","result":"28.987"},
+          p {"dep_id":"56","dep_name":"Morbihan","result":"29.007"},
+          p {"dep_id":"50","dep_name":"Manche","result":"29.013"},
+          p {"dep_id":"95","dep_name":"Val-d'Oise","result":"29.127"}
+          p ...
     div(class='routes')
       h3(class='route') GET /departement/:id/
       p The route to get the caracteristics of a specific French department
