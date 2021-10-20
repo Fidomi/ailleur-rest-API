@@ -17,10 +17,12 @@ block content
       h3(class='route') GET /maps/:type
       p The route to get a specific classification of the French departments according to a specific criteria :  type.
       p Only three types are available :
-       ul
+      ul
         li `security` : a map that agregates data about health and security 
         li `family` : a map with criteria about every day life (ride's time to get to work, number of schools...) 
         li `environment` : a map that agregates data about organic agriculture, average temperatures and nuclear threat.
+      p The results are arrays of sorted departements with a score out of 100 . For security map, bigger is the score, more secure is the department. For family map, bigger is the score, more pleasant is the daily life. For environment map, bigger is the score, healthier is the environment.
+      p
       div(class='row')
         div(class='example_req')
           p http://localhost:3002/maps/security
@@ -46,7 +48,7 @@ block content
           p ...
     div(class='routes')
       h3(class='route') GET /survey/
-      p The route to get the survey
+      p The route to get the entire survey
       p It returns an array with all the questions of the survey.
       div(class='row')
         div(class='example_req')
@@ -63,6 +65,16 @@ block content
           p "Supportez-vous la chaleur?",
           p "A quelle distance d'une centrale nucléaire seriez-vous prêt à vous installer?",
           p   ]
+    div(class='routes')
+      h3(class='route') GET /survey/:id
+      p The route to get to a specific question of the survey
+      p It returns an object with the question asked.
+      div(class='row')
+        div(class='example_req')
+          p http://localhost:3002/survey/4
+        div(class='example_res')
+          p {"surveyQuestion":"Combien de kilomètres êtes-vous prêt à parcourir pour aller voir votre généraliste?"}
+
     div(class='routes')
       h3(class='route') GET /mymap/?a1={answer1}&a2={answer2}&a3={answer3}...
       p The route to get the survey's results
@@ -85,7 +97,7 @@ block content
           p {"dep_id":"95","dep_name":"Val-d'Oise","result":"29.127"}
           p ...
     div(class='routes')
-      h3(class='route') GET /departement/:id/
+      h3(class='route') GET /departement/:id
       p The route to get the caracteristics of a specific French department
       div(class='row')
         div(class='example_req')
@@ -111,4 +123,8 @@ block content
           p  minTemp: -10.45,
           p  sunlight_hours: "2020",
           p }
+    br
+    h2 Error Handling 
+    p Every route parameter and query string is verified with a validator which prints an error message if any.
+    p For other errors, the API returns an appropriate HTTP response code, for example 404 (Not Found), and a JSON response. Any HTTP response code that is not in the range 200 - 299 is considered an error.
 
