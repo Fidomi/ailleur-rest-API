@@ -5,10 +5,10 @@ export const familyWeights = (a0, a1, a2) => {
             weight3 = 1;
             break;
         case "1":
-            weight3 = 5;
+            weight3 = 4;
             break;
         case "2":
-            weight3 = 5;
+            weight3 = 4;
             break;
         default:
             weight3 = 1;
@@ -18,10 +18,10 @@ export const familyWeights = (a0, a1, a2) => {
             weight2 = 1;
             break;
         case "1":
-            weight2 = 5;
+            weight2 = 4;
             break;
         case "2":
-            weight2 = 5;
+            weight2 = 4;
             break;
         case "3":
             weight2 = 1;
@@ -37,7 +37,7 @@ export const familyWeights = (a0, a1, a2) => {
             weight1 = 2;
             break;
         case "2":
-            weight1 = 5;
+            weight1 = 4;
             break;
         default:
             weight1 = 2;
@@ -52,20 +52,20 @@ export const securityWeights = (a3, a4, a5) => {
             weight2 = 1;
             break;
         case "1":
-            weight2 = 3;
+            weight2 = 2;
             break;
         case "2":
-            weight2 = 5;
+            weight2 = 4;
             break;
         default:
             weight2 = 1;
     }
     switch (a4) {
         case "0":
-            weight3 = 6;
+            weight3 = 8;
             break;
         case "1":
-            weight3 = 5;
+            weight3 = 4;
             break;
         case "2":
             weight3 = 2;
@@ -81,10 +81,10 @@ export const securityWeights = (a3, a4, a5) => {
             weight1 = 1;
             break;
         case "1":
-            weight1 = 3;
+            weight1 = 2;
             break;
         case "2":
-            weight1 = 5;
+            weight1 = 4;
             break;
         default:
             weight1 = 1;
@@ -102,10 +102,10 @@ export const environmentWeights = (a6, a7, a8) => {
             weight1 = 2;
             break;
         case "2":
-            weight1 = 3;
+            weight1 = 4;
             break;
         case "3":
-            weight1 = 5;
+            weight1 = 8;
             break;
         default:
             weight1 = 1;
@@ -115,10 +115,10 @@ export const environmentWeights = (a6, a7, a8) => {
             weight2 = 1;
             break;
         case "1":
-            weight2 = 3;
+            weight2 = 2;
             break;
         case "2":
-            weight2 = 5;
+            weight2 = 4;
             break;
         default:
             weight2 = 1;
@@ -128,10 +128,10 @@ export const environmentWeights = (a6, a7, a8) => {
             weight1 = 1;
             break;
         case "1":
-            weight1 = 3;
+            weight1 = 2;
             break;
         case "2":
-            weight1 = 5;
+            weight1 = 4;
             break;
         default:
             weight1 = 1;

@@ -5,20 +5,19 @@ export const securityResults = (weight1, weight2, weight3) => {
         const weighted_average =
             (weight1 *
                 (100 -
-                    (parseFloat(curValue.num_assaults) * 100) /
+                    (100 * (parseFloat(curValue.num_assaults) * 100)) /
                         curValue.total_population) +
                 weight2 *
                     (100 -
-                        (parseFloat(curValue.num_burglaries) * 100) /
+                        (100 * (parseFloat(curValue.num_burglaries) * 100)) /
                             curValue.total_population) +
-                weight3 *
-                    (curValue.num_healthCenters_10000_inhabitants / 100)) /
+                weight3 * curValue.num_healthCenters_10000_inhabitants) /
             (weight1 + weight2 + weight3);
 
         const result = {
             dep_id: curValue.num_dep,
             dep_name: curValue.dep_name,
-            danger_total: 100 * weighted_average.toFixed(2),
+            danger_total: ((weighted_average * 100) / 75).toFixed(2),
         };
         acc.push(result);
         return acc;
@@ -50,7 +49,7 @@ export const environmentResults = (weight1, weight2, weight3) => {
         const result = {
             dep_id: curValue.num_dep,
             dep_name: curValue.dep_name,
-            environmental_health: weighted_average.toFixed(2),
+            environmental_health: ((weighted_average * 100) / 40).toFixed(2),
         };
         acc.push(result);
         return acc;
