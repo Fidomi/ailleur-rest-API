@@ -30,7 +30,7 @@ The results are arrays of sorted departements with a score out of 100 . For secu
 | ----------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | http://localhost:3002/maps/security | `mapData: [{ dep_id: "50", dep_name: "Manche", danger_total: "10.76" },{ dep_id: "15", dep_name: "Cantal", danger_total: "11.00" },{ dep_id: "48", dep_name: "Lozère", danger_total: "11.05" },{ dep_id: "53", dep_name: "Mayenne", danger_total: "11.92" }`,... |
 
-**GET /survey/**
+**GET /survey**
 
 The route to get the survey.
 It returns an array with all the questions of the survey.
@@ -38,6 +38,15 @@ It returns an array with all the questions of the survey.
 | Request Example              | Response Example                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 | ---------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | http://localhost:3002/survey | `surveyData: ["Situation familiale","tranche d'âge","part du télétravail dans votre activité","Craignez-vous d'être cambriolé?","Combien de kilomètres êtes-vous prêt à parcourir pour aller voir votre généraliste?","Est-ce que le nombre d'agressions sur un territoire est un critère important pour vous?","Quelle est la part du bio dans votre alimentation?","Supportez-vous la chaleur?","A quelle distance d'une centrale nucléaire seriez-vous prêt à vous installer?"` |
+
+**GET /survey/:id**
+
+The route to get to a specific question of the survey
+It returns an object with the question asked.
+
+| Request Example                | Response Example                                                                                           |
+| ------------------------------ | ---------------------------------------------------------------------------------------------------------- |
+| http://localhost:3002/survey/4 | `{"surveyQuestion":"Combien de kilomètres êtes-vous prêt à parcourir pour aller voir votre généraliste?"}` |
 
 **GET /mymap/?a1={answer1}&a2={answer2}&a3={answer3}...**
 
