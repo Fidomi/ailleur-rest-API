@@ -68,7 +68,7 @@ router.get("/survey", function (req, res) {
     if (!surveyData) {
         res.status(404).send("Not found.");
     } else {
-        res.send([surveyData]);
+        res.send(surveyData);
     }
 });
 
