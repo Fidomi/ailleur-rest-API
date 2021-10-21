@@ -30,7 +30,7 @@ router.get(
         if (!departementData) {
             res.status(400).send("Not found.");
         } else {
-            res.send({ departementData });
+            res.send([departementData]);
         }
     }
 );
@@ -58,7 +58,7 @@ router.get(
         if (!mapData) {
             res.status(404).send("Not found.");
         } else {
-            res.send({ mapData });
+            res.send([mapData]);
         }
     }
 );
@@ -68,7 +68,7 @@ router.get("/survey", function (req, res) {
     if (!surveyData) {
         res.status(404).send("Not found.");
     } else {
-        res.send({ surveyData });
+        res.send([surveyData]);
     }
 });
 
@@ -93,7 +93,7 @@ router.get(
         if (!surveyQuestion) {
             res.status(404).send("Not found.");
         } else {
-            res.send({ surveyQuestion });
+            res.send([surveyQuestion]);
         }
     }
 );
@@ -113,14 +113,10 @@ router.get(
             .withMessage(
                 "Answers a1, a4, and a6 must have a value of 0, 1, 2 or 3."
             ),
-        // query("a1", "a4", "a6")
-        //     .isIn(["0", "1", "2", "3"])
-        //     .withMessage("Answers are 0 or 1 or 2 eventually 3."),
     ],
     function (req, res) {
         const { a0, a1, a2, a3, a4, a5, a6, a7, a8 } = req.query;
         const result = validationResult(req);
-        console.log("result>>>>>>>", a4);
         if (!result.isEmpty()) {
             res.render("error_unvalid_routeParam", {
                 error: result.array(),
@@ -130,7 +126,7 @@ router.get(
         if (!myMapData) {
             res.status(404).send("Not found.");
         } else {
-            res.send({ myMapData });
+            res.send([myMapData]);
         }
     }
 );
