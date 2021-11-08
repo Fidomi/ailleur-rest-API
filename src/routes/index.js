@@ -63,40 +63,36 @@ router.get(
     }
 );
 
-router.get("/survey", function (req, res) {
-    const surveyData = getSurvey();
-    if (!surveyData) {
-        res.status(404).send("Not found.");
+const handleQueries = function (req, res, next) {
+    if (!req.query.questionNumber) {
+        return next();
     } else {
-        res.send(surveyData);
-    }
-});
-
-router.get(
-    "/survey/:id",
-    [
-        param("id")
-            .isNumeric()
-            .matches(/[0-8]/)
-            .withMessage("Not a valid survey number."),
-    ],
-    function (req, res) {
-        const id = req.params.id;
-        //Validation params
-        const result = validationResult(req);
-        if (!result.isEmpty()) {
+        const questionNumber = req.query.questionNumber;
+        parseInt(questionNumber.trim());
+        if (questionNumber < 0 || questionNumber > 8) {
             res.render("error_unvalid_routeParam", {
-                error: result.array(),
+                error: [
+                    {
+                        msg: "Not a valid question number",
+                        value: questionNumber,
+                        param: "questionNumber",
+                    },
+                ],
             });
         }
-        const surveyQuestion = getSurveyById(id);
-        if (!surveyQuestion) {
-            res.status(404).send("Not found.");
-        } else {
-            res.send([surveyQuestion]);
-        }
+        const questionData = getSurveyById(questionNumber);
+        res.send([questionData]);
     }
-);
+};
+
+router.get("/survey", handleQueries, function (req, res) {
+    const survey = getSurvey();
+    if (!survey) {
+        res.status(404).send("Not found.");
+    } else {
+        res.send(survey);
+    }
+});
 
 router.get(
     "/mymap",
@@ -126,7 +122,7 @@ router.get(
         if (!myMapData) {
             res.status(404).send("Not found.");
         } else {
-            res.send([myMapData]);
+            res.send(myMapData);
         }
     }
 );
