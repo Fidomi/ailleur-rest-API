@@ -18,10 +18,11 @@ app.set("view engine", "pug");
 
 //Use of middlewares
 app.use(express.static(path.join(PROJECT_DIR, "/public")));
+//set the headers to Access-Control-Allow-Origin: *
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
+// app.use(cookieParser());
 
 app.use(function (req, res, next) {
     setTimeout(next, Math.floor(Math.random() * 2000 + 100));
