@@ -2,12 +2,11 @@
  * Module dependencies.
  */
 
-import express from "express";
-import createError from "http-errors";
-import path from "path";
-import indexRouter from "./src/routes/index";
-import cors from "cors";
-const cookieParser = require("cookie-parser");
+const express = require("express");
+const createError = require("http-errors");
+const path = require("path");
+const indexRouter = require("./src/routes/index");
+const cors = require("cors");
 
 const app = express();
 const PROJECT_DIR = __dirname;
@@ -16,8 +15,13 @@ const PROJECT_DIR = __dirname;
 app.set("views", path.join(PROJECT_DIR, "/src/views"));
 app.set("view engine", "pug");
 
-//Use of middlewares
+//*******Use of middlewares
+
 app.use(express.static(path.join(PROJECT_DIR, "/public")));
+
+// Have Node serve the files for our built React app
+//app.use(express.static(path.resolve(PROJECT_DIR, "/frontend/build")));
+
 //set the headers to Access-Control-Allow-Origin: *
 app.use(cors());
 app.use(express.json());

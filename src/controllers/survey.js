@@ -1,6 +1,6 @@
-import survey from "../models/survey";
+const survey = require("../models/survey");
 
-export const getSurvey = () => {
+exports.getSurvey = function () {
     const questionsSurvey = survey.map((element, index) => {
         return {
             questionNumber: index,
@@ -11,7 +11,7 @@ export const getSurvey = () => {
     return questionsSurvey;
 };
 
-export const getSurveyById = (id) => {
+exports.getSurveyById = function (id) {
     const index = parseInt(id);
     const question = survey[index];
     return question;

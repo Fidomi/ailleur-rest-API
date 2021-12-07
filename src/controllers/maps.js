@@ -1,6 +1,6 @@
-import departementData from "../models/departements";
+const departementData = require("../models/departements");
 
-export const securityResults = (weight1, weight2, weight3) => {
+exports.securityResults = function (weight1, weight2, weight3) {
     const security_results = departementData.reduce((acc, curValue) => {
         const weighted_average =
             (weight1 *
@@ -26,7 +26,7 @@ export const securityResults = (weight1, weight2, weight3) => {
     return security_results;
 };
 
-export const environmentResults = (weight1, weight2, weight3) => {
+exports.environmentResults = function (weight1, weight2, weight3) {
     const environment_results = departementData.reduce((acc, curValue) => {
         const nuclear_threat = curValue.num_nuclear_reactor
             ? curValue.num_nuclear_reactors
@@ -60,7 +60,7 @@ export const environmentResults = (weight1, weight2, weight3) => {
     return environment_results;
 };
 
-export const familyResults = (weight1, weight2, weight3) => {
+exports.familyResults = function (weight1, weight2, weight3) {
     const family_results = departementData.reduce((acc, curValue) => {
         const weighted_average =
             (weight1 * parseFloat(curValue.fiber_ratio) +
@@ -85,7 +85,7 @@ export const familyResults = (weight1, weight2, weight3) => {
     return family_results.reverse();
 };
 
-export const getMapWithName = (name, weight1, weight2, weight3) => {
+exports.getMapWithName = function (name, weight1, weight2, weight3) {
     switch (name) {
         case "security":
             return securityResults(weight1, weight2, weight3);

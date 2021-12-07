@@ -1,4 +1,4 @@
-export const familyWeights = (a0, a1, a2) => {
+exports.familyWeights = function (a0, a1, a2) {
     let [weight3, weight2, weight1] = [1, 1, 1];
     switch (a0) {
         case "0":
@@ -45,7 +45,7 @@ export const familyWeights = (a0, a1, a2) => {
     return [weight1, weight2, weight3];
 };
 
-export const securityWeights = (a3, a4, a5) => {
+exports.securityWeights = function (a3, a4, a5) {
     let [weight3, weight2, weight1] = [1, 1, 1];
     switch (a3) {
         case "0":
@@ -92,7 +92,7 @@ export const securityWeights = (a3, a4, a5) => {
     return [weight1, weight2, weight3];
 };
 
-export const environmentWeights = (a6, a7, a8) => {
+exports.environmentWeights = function (a6, a7, a8) {
     let [weight3, weight2, weight1] = [1, 1, 1];
     switch (a6) {
         case "0":

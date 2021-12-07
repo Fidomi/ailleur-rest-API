@@ -1,9 +1,10 @@
-import express from "express";
-import { validationResult, param, query } from "express-validator";
-import { getDepartementWithId } from "../controllers/departements";
-import { getMapWithName } from "../controllers/maps";
-import { getSurvey, getSurveyById } from "../controllers/survey";
-import { getMyMap } from "../controllers/myMap";
+const express = require("express");
+const path = require("path");
+const { validationResult, param, query } = require("express-validator");
+const { getDepartementWithId } = require("../controllers/departements");
+const { getMapWithName } = require("../controllers/maps");
+const { getSurvey, getSurveyById } = require("../controllers/survey");
+const { getMyMap } = require("../controllers/myMap");
 
 const router = express.Router();
 
@@ -127,8 +128,13 @@ router.get(
     }
 );
 
-router.get("/", function (req, res, next) {
+router.get("/api", function (req, res, next) {
     res.render("index", { title: "Ailleurs's REST API" });
 });
 
-export default router;
+router.get("/", function (req, res, next) {
+    console.log("HERE");
+    res.sendFile(path.resolve(__dirname, "../../client/build", "index.html"));
+});
+
+module.exports = router;

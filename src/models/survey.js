@@ -78,4 +78,4 @@ const survey = [
     // },
 ];
 
-export default survey;
+module.exports = survey;

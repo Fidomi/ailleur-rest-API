@@ -1,4 +1,4 @@
-export default [
+const departements = [
     {
         _id: {
             $oid: "6167f6fa8dc41272169c2fb2",
@@ -2033,3 +2033,5 @@ export default [
         sunlight_hours: "1774",
     },
 ];
+
+module.exports = departements;

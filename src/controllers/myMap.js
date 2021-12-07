@@ -1,9 +1,16 @@
-import survey from "../models/survey";
-import departementData from "../models/departements";
-import { securityResults, environmentResults, familyResults } from "./maps";
-import { securityWeights, environmentWeights, familyWeights } from "./weights";
+const departementData = require("../models/departements");
+const {
+    securityResults,
+    environmentResults,
+    familyResults,
+} = require("./maps");
+const {
+    securityWeights,
+    environmentWeights,
+    familyWeights,
+} = require("./weights");
 
-export const getMyMap = (a0, a1, a2, a3, a4, a5, a6, a7, a8) => {
+exports.getMyMap = function (a0, a1, a2, a3, a4, a5, a6, a7, a8) {
     const [famWeight1, famWeight2, famWeight3] = familyWeights(a0, a1, a2);
     const [secWeight1, secWeight2, secWeight3] = securityWeights(a3, a4, a5);
     const [envWeight1, envWeight2, envWeight3] = environmentWeights(a6, a7, a8);
