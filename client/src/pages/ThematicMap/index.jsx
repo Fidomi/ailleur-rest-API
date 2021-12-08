@@ -2,6 +2,7 @@ import React from 'react';
 import France from '../../components/France/index';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
+import Loader from 'react-loader-spinner';
 
 const fetchResults = async (routeID) => {
     const res = await fetch(`/maps/${routeID}`);
@@ -40,7 +41,24 @@ function ThematicMap() {
     return (
         <React.Fragment>
             {status === 'error' && <div>{error.message}</div>}
-            {status === 'loading' && <div>Loading data...</div>}
+            {status === 'loading' && (
+                <div
+                    style={{
+                        width: '100%',
+                        height: '100vh',
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center'
+                    }}
+                >
+                    <Loader
+                        type="ThreeDots"
+                        color="#6ea4d3"
+                        height="100"
+                        width="100"
+                    />
+                </div>
+            )}
             {status === 'success' && (
                 <France
                     title={typeTitle}

@@ -14,8 +14,12 @@ function Maps() {
             <HeroText>
                 <HeroTextTitle>Nos carte thématiques</HeroTextTitle>
                 <br />
-                Ailleurs propose des cartes thématiques que vous pouvez affiner
-                selon ce qui vous importe le plus.
+                Ailleurs propose des cartes thématiques de la France élaborées à
+                partir des données recueillies auprès de data.gouv.fr.
+                <br />
+                {`L'interprétation de ces données est tout à fait subjective et
+                les résultats exposés ici ne tendent pas à démontrer quoique ce
+                soit.`}
             </HeroText>
             <CardsContainer>
                 {menuCategories[0].subcategories.map((category, index) => (

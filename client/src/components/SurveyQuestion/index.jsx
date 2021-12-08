@@ -8,6 +8,7 @@ import PropTypes from 'prop-types';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { ResultsContext, SurveyContext } from '../../utils/context/index';
 import { useQuery } from 'react-query';
+import Loader from 'react-loader-spinner';
 
 const fetchQuestion = async () => {
     const res = await fetch(`/survey/`);
@@ -47,7 +48,24 @@ const SurveyQuestion = (props) => {
     return (
         <Container key={props.questionNumber}>
             {status === 'error' && <div>{error.message}</div>}
-            {status === 'loading' && <div>Loading data...</div>}
+            {status === 'loading' && (
+                <div
+                    style={{
+                        width: '100%',
+                        height: '100vh',
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center'
+                    }}
+                >
+                    <Loader
+                        type="ThreeDots"
+                        color="#6ea4d3"
+                        height="100"
+                        width="100"
+                    />
+                </div>
+            )}
             {status === 'success' && (
                 <Question>
                     <QuestionText htmlFor={props.questionNumber}>
