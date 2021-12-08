@@ -134,6 +134,6 @@ router.get("/api", function (req, res, next) {
     res.render("index", { title: "Ailleurs's REST API" });
 });
 
-router.use("/", express.static(path.resolve(__dirname, "../../client/build")));
+router.use("/*", express.static(path.resolve(__dirname, "../../client/build")));
 
 module.exports = router;
