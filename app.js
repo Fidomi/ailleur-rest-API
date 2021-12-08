@@ -16,17 +16,12 @@ app.set("views", path.join(PROJECT_DIR, "/src/views"));
 app.set("view engine", "pug");
 
 //*******Use of middlewares
-
 app.use(express.static(path.join(PROJECT_DIR, "/public")));
-
-// Have Node serve the files for our built React app
-//app.use(express.static(path.resolve(PROJECT_DIR, "/frontend/build")));
 
 //set the headers to Access-Control-Allow-Origin: *
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-// app.use(cookieParser());
 
 app.use(function (req, res, next) {
     setTimeout(next, Math.floor(Math.random() * 2000 + 100));

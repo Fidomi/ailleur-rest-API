@@ -3,9 +3,10 @@ import React, { useContext, useState } from 'react';
 import { ResultsContext } from '../../utils/context/index';
 import France from '../../components/France/index';
 import { useQuery } from 'react-query';
+import Error from '../Error/index';
 
 const fetchResults = async (queryString) => {
-    const res = await fetch(`http://localhost:3002/mymap/?${queryString}`);
+    const res = await fetch(`/mymap/?${queryString}`);
     const response = await res.json();
     return response;
 };
@@ -23,22 +24,22 @@ function MyDestination() {
                 : acc + `&a${index}=${word}`,
         ''
     );
-    //const queryString = `a0=1&a1=3&a2=1&a3=1&a4=3&a5=0&a6=2&a7=2&a8=2`;
-    console.log(answersQuery);
 
-    const useAnswersQuery = (answersQuery) =>
-        useQuery(['Answsers', answersQuery], () => fetchResults(answersQuery));
-    const { status, data, error } = useAnswersQuery(answersQuery);
+    let { status, data, error } = useQuery(
+        `answsers-${answersQuery}`,
+        () => fetchResults(answersQuery),
+        { refetchOnMount: true }
+    );
+    let results = data;
 
-    const results = data;
-    console.log(results);
     return (
         <React.Fragment>
             {status === 'error' && <div>{error.message}</div>}
             {status === 'loading' && <div>Loading data...</div>}
-            {status === 'success' && (
+            {status === 'success' && results !== undefined && (
                 <France title="Ma Destination" results={results} />
             )}
+            {results === undefined && <Error />}
         </React.Fragment>
     );
 }

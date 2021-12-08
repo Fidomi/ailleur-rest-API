@@ -1,6 +1,14 @@
 const departementData = require("../models/departements");
+const {
+    securityWeights,
+    environmentWeights,
+    familyWeights,
+} = require("./weights");
+const [famWeight1, famWeight2, famWeight3] = familyWeights(1, 2, 2);
+const [secWeight1, secWeight2, secWeight3] = securityWeights(1, 1, 1);
+const [envWeight1, envWeight2, envWeight3] = environmentWeights(1, 1, 1);
 
-exports.securityResults = function (weight1, weight2, weight3) {
+const securityResults = (weight1, weight2, weight3) => {
     const security_results = departementData.reduce((acc, curValue) => {
         const weighted_average =
             (weight1 *
@@ -23,10 +31,10 @@ exports.securityResults = function (weight1, weight2, weight3) {
         return acc;
     }, []);
     security_results.sort((a, b) => a.danger_total - b.danger_total);
-    return security_results;
+    return security_results.reverse();
 };
 
-exports.environmentResults = function (weight1, weight2, weight3) {
+const environmentResults = (weight1, weight2, weight3) => {
     const environment_results = departementData.reduce((acc, curValue) => {
         const nuclear_threat = curValue.num_nuclear_reactor
             ? curValue.num_nuclear_reactors
@@ -57,22 +65,22 @@ exports.environmentResults = function (weight1, weight2, weight3) {
     environment_results.sort(
         (a, b) => a.environmental_health - b.environmental_health
     );
-    return environment_results;
+    return environment_results.reverse();
 };
 
-exports.familyResults = function (weight1, weight2, weight3) {
+const familyResults = (weight1, weight2, weight3) => {
     const family_results = departementData.reduce((acc, curValue) => {
+        const weightedFiber = weight1 * parseFloat(curValue.fiber_ratio);
+        const weightedRideTime =
+            weight2 * (100 - (parseFloat(curValue.rideAverageTime) * 100) / 60);
+        const weightedSchoolsNumber =
+            weight3 *
+            ((((curValue.schools_number * 100) / curValue.total_population) *
+                100) /
+                0.15);
         const weighted_average =
-            (weight1 * parseFloat(curValue.fiber_ratio) +
-                weight2 *
-                    (100 - (parseFloat(curValue.rideAverageTime) * 100) / 60) +
-                (weight3 *
-                    ((curValue.schools_number * 100) /
-                        curValue.total_population) *
-                    100) /
-                    0.15) /
+            (weightedFiber + weightedRideTime + weightedSchoolsNumber) /
             (weight1 + weight2 + weight3);
-
         const result = {
             dep_id: curValue.num_dep,
             dep_name: curValue.dep_name,
@@ -85,15 +93,22 @@ exports.familyResults = function (weight1, weight2, weight3) {
     return family_results.reverse();
 };
 
-exports.getMapWithName = function (name, weight1, weight2, weight3) {
+const getMapWithName = (name) => {
     switch (name) {
         case "security":
-            return securityResults(weight1, weight2, weight3);
+            return securityResults(secWeight1, secWeight2, secWeight3);
         case "environment":
-            return environmentResults(weight1, weight2, weight3);
+            return environmentResults(envWeight1, envWeight2, envWeight3);
         case "family":
-            return familyResults(weight1, weight2, weight3);
+            return familyResults(famWeight1, famWeight2, famWeight3);
         default:
             throw new Error(`The case "${name}" doesn't exist.`);
     }
+};
+
+module.exports = {
+    familyResults: familyResults,
+    getMapWithName: getMapWithName,
+    environmentResults: environmentResults,
+    securityResults: securityResults,
 };

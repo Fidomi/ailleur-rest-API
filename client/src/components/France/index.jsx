@@ -26,7 +26,6 @@ function France(props) {
             : setPalmaresSize('small');
     };
     const resultWord = props.resultWord ? props.resultWord : 'result';
-
     function spreadResults(resultsArray) {
         const maxRate = parseFloat(resultsArray[0][resultWord]);
         const minRate = parseFloat(
@@ -44,10 +43,16 @@ function France(props) {
     const spreadResultsArray = spreadResults(props.results);
 
     function resultsColor(dpt) {
-        let currDptIndex = spreadResultsArray.findIndex(
-            (resultDpt) =>
-                parseInt(resultDpt['dep_id']) === parseInt(dpt.dataNum)
-        );
+        let currDptIndex = spreadResultsArray.findIndex((resultDpt) => {
+            if (dpt.dataNum === '2') {
+                return resultDpt['dep_name'] === 'Aisne';
+            } else if (dpt.dataNum !== '2A' && dpt.dataNum !== '2B') {
+                return parseInt(resultDpt['dep_id']) === parseInt(dpt.dataNum);
+            } else {
+                return resultDpt['dep_id'] === dpt.dataNum;
+            }
+        });
+
         let rate = parseFloat(spreadResultsArray[currDptIndex]['spreadResult']);
         if (rate <= 100 && rate > 80) {
             return colorsMap.veryStrong;
@@ -61,6 +66,23 @@ function France(props) {
             return colorsMap.veryLow;
         }
     }
+
+    const handleColor = (dpt, colorFinalist) => {
+        let finalistId = props.results[0]['dep_id'];
+        let isFinalist = false;
+        const isFinalistCorsica = finalistId === ('2A' || '2B') ? true : false;
+        if (isFinalistCorsica) {
+            isFinalist = dpt.dataNum === finalistId ? true : false;
+        } else {
+            isFinalist =
+                parseInt(dpt.dataNum) === parseInt(finalistId) ? true : false;
+        }
+        if (isFinalist) {
+            return colorFinalist;
+        } else {
+            return resultsColor(dpt);
+        }
+    };
 
     return (
         <MainContainer>
@@ -91,12 +113,7 @@ function France(props) {
                                 d={dpt.d}
                                 data-num={dpt.dataNum}
                                 data-name={dpt.dataName}
-                                fill={
-                                    parseInt(props.results[0]['dep_id']) ===
-                                    parseInt(dpt.dataNum)
-                                        ? colors.finalist
-                                        : resultsColor(dpt)
-                                }
+                                fill={handleColor(dpt, colors.finalist)}
                                 stroke={colors.dark}
                             ></Departement>
                         ))}

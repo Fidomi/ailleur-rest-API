@@ -4,7 +4,7 @@ import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 
 const fetchResults = async (routeID) => {
-    const res = await fetch(`http://localhost:3002/maps/${routeID}`);
+    const res = await fetch(`/maps/${routeID}`);
     const result = await res.json();
     return result;
 };

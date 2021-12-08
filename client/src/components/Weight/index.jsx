@@ -42,7 +42,7 @@ const Weight = ({ id }) => {
                     id={id}
                     name={id}
                     min="0"
-                    max={id === 'a2' || id === 'a3' || id === 'a7' ? '3' : '2'}
+                    max={id === 'a1' || id === 'a4' || id === 'a6' ? '3' : '2'}
                     value={value}
                     onChange={(event) => handleChange(event, id)}
                     step="1"

@@ -10,7 +10,7 @@ import { ResultsContext, SurveyContext } from '../../utils/context/index';
 import { useQuery } from 'react-query';
 
 const fetchQuestion = async () => {
-    const res = await fetch(`http://localhost:3002/api/survey/`);
+    const res = await fetch(`/survey/`);
     const result = await res.json();
     return result;
 };

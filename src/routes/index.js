@@ -29,7 +29,7 @@ router.get(
         }
         const departementData = getDepartementWithId(id);
         if (!departementData) {
-            res.status(400).send("Not found.");
+            res.status(404).send("Not found.");
         } else {
             res.send([departementData]);
         }
@@ -51,15 +51,15 @@ router.get(
             res.render("error_unvalid_routeParam", {
                 error: result.array(),
             });
+            return;
         }
-        const mapData =
-            name === "environment"
-                ? getMapWithName(name, 10, 3, 2)
-                : getMapWithName(name, 1, 1, 1);
+        const mapData = getMapWithName(name);
         if (!mapData) {
-            res.status(404).send("Not found.");
+            // res.status(404).send("Not found.");
+            res.sendStatus(404).withMessage("Not found.");
+            return;
         } else {
-            res.send([mapData]);
+            res.send(mapData);
         }
     }
 );
@@ -118,10 +118,12 @@ router.get(
             res.render("error_unvalid_routeParam", {
                 error: result.array(),
             });
+            return;
         }
         const myMapData = getMyMap(a0, a1, a2, a3, a4, a5, a6, a7, a8);
         if (!myMapData) {
-            res.status(404).send("Not found.");
+            res.sendStatus(404).withMessage("Not found.");
+            return;
         } else {
             res.send(myMapData);
         }
@@ -132,9 +134,6 @@ router.get("/api", function (req, res, next) {
     res.render("index", { title: "Ailleurs's REST API" });
 });
 
-router.get("/", function (req, res, next) {
-    console.log("HERE");
-    res.sendFile(path.resolve(__dirname, "../../client/build", "index.html"));
-});
+router.use("/", express.static(path.resolve(__dirname, "../../client/build")));
 
 module.exports = router;
