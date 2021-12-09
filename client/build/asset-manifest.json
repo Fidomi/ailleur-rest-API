@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.js": "/static/js/main.deafada1.chunk.js",
+    "main.js.map": "/static/js/main.deafada1.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.834960fb.js",
+    "runtime-main.js.map": "/static/js/runtime-main.834960fb.js.map",
+    "static/js/2.e4d49b00.chunk.js": "/static/js/2.e4d49b00.chunk.js",
+    "static/js/2.e4d49b00.chunk.js.map": "/static/js/2.e4d49b00.chunk.js.map",
+    "index.html": "/index.html",
+    "static/js/2.e4d49b00.chunk.js.LICENSE.txt": "/static/js/2.e4d49b00.chunk.js.LICENSE.txt",
+    "static/media/christian-bowen-unsplash.21ddd118.jpg": "/static/media/christian-bowen-unsplash.21ddd118.jpg",
+    "static/media/damien-dufour-unsplash.5edd3daf.jpg": "/static/media/damien-dufour-unsplash.5edd3daf.jpg",
+    "static/media/environment.08890cdc.png": "/static/media/environment.08890cdc.png",
+    "static/media/jessica-rockowitz-unsplash.c34f08f0.jpg": "/static/media/jessica-rockowitz-unsplash.c34f08f0.jpg",
+    "static/media/joran-quinten-aOUlPvDJR18-unsplash.d684a60e.jpg": "/static/media/joran-quinten-aOUlPvDJR18-unsplash.d684a60e.jpg",
+    "static/media/matthieu-da-cruz-QrC4oaYG-WY-unsplash.b10b37dd.jpg": "/static/media/matthieu-da-cruz-QrC4oaYG-WY-unsplash.b10b37dd.jpg",
+    "static/media/pine-watt-unsplash.af338ff2.jpg": "/static/media/pine-watt-unsplash.af338ff2.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.834960fb.js",
+    "static/js/2.e4d49b00.chunk.js",
+    "static/js/main.deafada1.chunk.js"
+  ]
+}
