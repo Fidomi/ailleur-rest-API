@@ -3,12 +3,15 @@
     "version": "1.0.0",
     "description": "API Rest for Ailleurs project backend",
     "main": "index.js",
+    "config": {
+        "PUBLIC_URL": "https://partir-ailleurs.herokuapp.com/"
+    },
     "scripts": {
         "client": "cd client && npm start",
         "server": "nodemon ./index.js --exec babel-node -e js",
         "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
         "start": "npm run build && node --trace-warnings ./index.js",
-        "build": "cd client && npm install && npm run build"
+        "build": "cd client && npm run build"
     },
     "repository": {
         "type": "git",
