@@ -11,7 +11,7 @@
         "server": "nodemon ./index.js --exec babel-node -e js",
         "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
         "start": "npm run build && node --trace-warnings ./index.js",
-        "build": "cd client && npm run build"
+        "build": "cross-env NODE_ENV=production && cd client && npm run install && npm run build"
     },
     "repository": {
         "type": "git",
@@ -26,6 +26,7 @@
     "dependencies": {
         "concurrently": "^6.4.0",
         "cors": "^2.8.5",
+        "cross-env": "^7.0.3",
         "express": "^4.17.1",
         "express-validator": "^6.13.0",
         "http-errors": "^1.8.0",
