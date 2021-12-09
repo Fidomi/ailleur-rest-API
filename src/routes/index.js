@@ -131,10 +131,14 @@ router.get(
 );
 
 router.get("/api", function (req, res, next) {
-    console.log("API /");
     res.render("index", { title: "Ailleurs's REST API" });
 });
 
-router.use("/", express.static(path.resolve(__dirname, "../../client/build")));
+router.use("/", express.static(path.resolve(__dirname, "../../client/build/")));
+
+// All other GET requests not handled before will return our React app
+router.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "../../client/build", "index.html"));
+});
 
 module.exports = router;
