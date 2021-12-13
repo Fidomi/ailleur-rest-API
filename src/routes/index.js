@@ -136,7 +136,6 @@ router.get("/api", function (req, res, next) {
 
 router.use("/", express.static(path.resolve(__dirname, "../../client/build/")));
 
-// All other GET requests not handled before will return our React app
 router.get("*", (req, res) => {
     res.sendFile(path.resolve(__dirname, "../../client/build", "index.html"));
 });
