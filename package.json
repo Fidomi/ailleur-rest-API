@@ -7,8 +7,9 @@
         "client": "cd client && npm start",
         "server": "nodemon ./index.js --exec babel-node -e js",
         "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
-        "start": "npm run build && node --trace-warnings ./index.js",
+        "start": "node --trace-warnings ./index.js",
         "build": "cd client && npm install --only=dev && npm install && npm run build",
+        "heroku-postbuild": "npm run build",
         "startback": "node --trace-warnings ./index.js"
     },
     "repository": {
